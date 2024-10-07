@@ -8,11 +8,29 @@ export const useGetProducts = (params: any) => {
   return useQuery({
     queryKey: ["products", params],
     queryFn: async () => {
-      const queryParams = new URLSearchParams(params).toString();
-      const response = await fetch(`${API_URL}/products?${queryParams}`);
-      if (!response.ok) throw new Error("Network response was not ok");
-      return response.json();
+      try {
+        const queryParams = new URLSearchParams(params).toString();
+        const response = await fetch(`${API_URL}/products?${queryParams}`);
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      } catch (error) {
+        handleApiError(error);
+      }
     },
-    onError: handleApiError, // Optional error handling
+  });
+};
+
+export const useGetProduct = (id: number) => {
+  return useQuery({
+    queryKey: ["products", id],
+    queryFn: async () => {
+      try {
+        const response = await fetch(`${API_URL}/products/${id}`);
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      } catch (error) {
+        handleApiError(error);
+      }
+    },
   });
 };

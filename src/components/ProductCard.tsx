@@ -53,7 +53,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             </p>
           </div>
           <p>${product?.price}</p>
-          <button className="py-2 w-full bg-[#1d1d1d] text-white text-sm rounded-md">
+          <button className="py-2 w-full bg-[#0f1428] text-white text-sm rounded-md">
             Add to Cart
           </button>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import ProductCard from "./ProductCard";
 import { useGetProducts } from "../services/products/product-queries";
 import { Product } from "../services/products/product-model";
@@ -10,19 +10,17 @@ const ProductList = () => {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({});
 
-  const {
-    data: products,
-    isLoading,
-    error,
-  } = useGetProducts({
+  const { data, isLoading, error } = useGetProducts({
     page,
     limit,
     search,
     ...filters,
   });
-  console.log(products);
 
-  if (!products) return null;
+  const products = useMemo(() => {
+    if (data) return data.products;
+    return null;
+  }, [data]);
 
   return (
     <>
@@ -40,7 +38,7 @@ const ProductList = () => {
                 </div>
               ) : (
                 <div className="w-full flex flex-wrap gap-4 w-full ">
-                  {(products.products as Product[])?.map((product) => (
+                  {(products as Product[])?.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))}
                 </div>
