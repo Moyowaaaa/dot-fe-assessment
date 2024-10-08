@@ -21,6 +21,7 @@ const Details = () => {
   const onDeleteProduct = async () => {
     try {
       await deleteProduct(id);
+      navigate("/");
     } catch (err) {
       toast.error(`${err}`);
     }

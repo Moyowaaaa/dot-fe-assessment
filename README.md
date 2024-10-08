@@ -34,6 +34,8 @@ The technologies I used on this project:
 
 - Custom click outside hook for if a user clicks outside the cart, the cart closes
 
+- Microservices architecture, mutations, queries and models are split into different files so as to maintain an easy to maintain codebase
+
 ## Areas I would improve on if given more time
 
 - I decided to use tailwind css for css styling so as to be fast, next time I'd use SCSS instead of tailwind so as to make sure the code is less verbose

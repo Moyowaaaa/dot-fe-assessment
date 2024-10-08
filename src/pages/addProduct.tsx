@@ -107,8 +107,6 @@ const AddProduct = () => {
       reviews: 0,
     };
 
-    console.log(newProduct);
-
     try {
       await addProduct(newProduct as Product);
       setTimeout(() => {

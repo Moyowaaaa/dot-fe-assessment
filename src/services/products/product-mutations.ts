@@ -57,8 +57,22 @@ export const useDeleteProduct = () => {
       const response = await fetch(`${API_URL}/products/${productId}`, {
         method: "DELETE",
       });
+
       if (!response.ok) throw new Error("Failed to delete product");
-      return response.json();
+
+      let isJson;
+
+      if (
+        (isJson = response.headers
+          .get("content-type")
+          ?.includes("application/json"))
+      ) {
+        response.json();
+      } else {
+        return {};
+      }
+
+      return isJson ? response.json() : {};
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
