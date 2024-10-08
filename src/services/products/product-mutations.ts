@@ -49,11 +49,11 @@ export const useUpdateProduct = (productId: number | string) => {
   });
 };
 
-export const useDeleteProduct = (productId: string) => {
+export const useDeleteProduct = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async () => {
+    mutationFn: async (productId: string) => {
       const response = await fetch(`${API_URL}/products/${productId}`, {
         method: "DELETE",
       });

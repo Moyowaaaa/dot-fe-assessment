@@ -5,6 +5,9 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
 import About from "./pages/about";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Details from "./pages/details";
+import AddProduct from "./pages/addProduct";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -12,14 +15,18 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="App">
-        <Router>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
-        </Router>
-      </div>
+      <CartProvider>
+        <div className="App">
+          <Router>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/product/:id" element={<Details />} />
+              <Route path="/add-product" element={<AddProduct />} />
+            </Routes>
+          </Router>
+        </div>
+      </CartProvider>
     </QueryClientProvider>
   );
 }

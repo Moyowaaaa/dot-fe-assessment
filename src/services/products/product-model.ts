@@ -12,3 +12,11 @@ export interface Product {
   reviews: number;
   specifications: Record<string, string | number | boolean>;
 }
+
+export interface ProductFilters {
+  search: string;
+  minPrice?: number;
+  maxPrice?: number;
+  sortBy: string;
+  order: string;
+}

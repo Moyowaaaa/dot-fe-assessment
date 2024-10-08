@@ -20,7 +20,7 @@ export const useGetProducts = (params: any) => {
   });
 };
 
-export const useGetProduct = (id: number) => {
+export const useGetProduct = (id: string) => {
   return useQuery({
     queryKey: ["products", id],
     queryFn: async () => {
