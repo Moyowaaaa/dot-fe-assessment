@@ -31,7 +31,7 @@ export const useUpdateProduct = (productId: number | string) => {
   return useMutation({
     mutationFn: async (updatedProduct: Product) => {
       const response = await fetch(`${API_URL}/products/${productId}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
