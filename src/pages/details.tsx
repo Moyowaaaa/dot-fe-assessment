@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import PageLayout from "../layout/PageLayout";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useGetProduct } from "../services/products/product-queries";
 import Loader from "../components/Loader";
 import { sentenceCase } from "../utils/utils";
 import { useDeleteProduct } from "../services/products/product-mutations";
+import toast from "react-hot-toast";
+import { CartContext } from "../context/CartContext";
 
 const Details = () => {
   const navigate = useNavigate();
   const { id } = useParams<string>();
-
+  const { addToCart } = useContext(CartContext);
   if (!id) return null;
 
   const { data: product, isLoading, error } = useGetProduct(id);
@@ -20,16 +22,24 @@ const Details = () => {
     try {
       await deleteProduct(id);
     } catch (err) {
-      console.error("Error deleting product:", err);
+      toast.error(`${err}`);
+    }
+  };
+
+  const onAddToCart = () => {
+    try {
+      addToCart(product);
+    } catch (error) {
+      toast.error(`An error occured, please try again`);
     }
   };
 
   return (
     <>
       <PageLayout>
-        <div className="w-full mx-auto h-max py-10">
+        <div className="w-full mx-auto h-[110vh] lg:h-max py-10 bg-[#f1f0f5]">
           <div
-            className="w-10/12  mx-auto gap-6
+            className="w-11/12 lg:w-10/12  mx-auto gap-6
             flex-col
                           justify-between flex
 "
@@ -51,7 +61,7 @@ const Details = () => {
                       &larr; <span>Back to products</span>
                     </p>
                   </div>
-                  <div className="w-full h-[32rem] flex">
+                  <div className="w-full h-[32rem] flex flex-col lg:flex-row">
                     <div className="h-full  min-w-[20rem] ">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +81,7 @@ const Details = () => {
                       </svg>
                     </div>
 
-                    <div className="w-10/12 border-t-2  bg-[white] flex flex-col gap-4 p-4">
+                    <div className="w-full lg:w-10/12 border-t-2  bg-[white] flex flex-col gap-4 p-4">
                       <h1 className="text-2xl font-[700] text-[#817eeb] ">
                         {product?.category} <span>&gt;</span>{" "}
                         {product?.subCategory}
@@ -120,7 +130,10 @@ const Details = () => {
                         ))}
                       </div>
                       <div className="w-max pt-4 flex items-center gap-4">
-                        <button className="py-3 w-[8rem] bg-[#0f1428] font-900 text-white text-sm rounded-md">
+                        <button
+                          onClick={() => onAddToCart()}
+                          className="py-3 w-[8rem] bg-[#0f1428] font-900 text-white text-sm rounded-md"
+                        >
                           Add to Cart
                         </button>
 

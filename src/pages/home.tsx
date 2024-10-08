@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Pagination from "../components/Pagination";
 import Sidebar from "../components/Sidebar";
@@ -12,32 +12,47 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
 
   const [filters, setFilters] = useState<ProductFilters>({
     order: "desc",
-
     maxPrice: 9999999,
     minPrice: 0,
     search: "",
     sortBy: "",
   });
 
-  console.log({ filters });
+  const onPageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
+  const { data: productData } = useGetProducts({
+    page,
+    limit,
+    ...filters,
+  });
+
+  useEffect(() => {
+    if (limit > 2) {
+      setPage(1);
+    }
+  }, [limit]);
 
   return (
     <>
       <PageLayout>
         <div className="w-full mx-auto h-max py-10">
           <div
-            className="w-10/12  mx-auto 
-                          items-center justify-between flex
+            className="w-10/12 mx-auto 
+                          items-center justify-between  flex lg:flex-row
 "
           >
             <h1 className="font-bold text-xl">All Products</h1>
 
             <button
               onClick={() => navigate("/add-product")}
-              className="py-2 w-[12rem] mr-12 bg-[#0f1428] text-white text-sm rounded-md flex items-center justify-center gap-4
+              className="py-2 w-[12rem] lg:mr-12 bg-[#0f1428] text-white text-sm rounded-md flex items-center justify-center gap-4
               "
             >
               <svg
@@ -60,7 +75,17 @@ const Home = () => {
             </button>
           </div>
           <FilterSection filters={filters} setFilters={setFilters} />
-          <ProductList filters={filters} />
+          <ProductList filters={filters} page={page} limit={limit} />
+
+          {productData && (
+            <Pagination
+              currentPage={page}
+              totalPages={productData.totalPages}
+              onPageChange={onPageChange}
+              limit={limit}
+              setLimit={setLimit}
+            />
+          )}
         </div>
       </PageLayout>
     </>

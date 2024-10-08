@@ -11,10 +11,10 @@ const FilterSection = ({
   return (
     <>
       <div className="w-full mx-auto h-max py-10">
-        <div className="w-10/12  mx-auto flex flex-col gap-4">
-          <div className="flex w-full gap-4  justify-between pr-16">
+        <div className="w-11/12 lg:w-10/12  mx-auto flex flex-col gap-4">
+          <div className="flex w-full gap-4 flex-col lg:flex-row lg:justify-between lg:pr-16">
             <div className="flex items-center gap-4">
-              <div className="gap-2 w-[20rem] flex flex-col ">
+              <div className="gap-2 w-10/12 lg:w-[20rem] flex flex-col ">
                 <h1 className="font-[700]">Search</h1>
                 <input
                   type="text"
@@ -29,7 +29,7 @@ const FilterSection = ({
                 />
               </div>
 
-              <div className="gap-2 w-[20rem] flex flex-col ">
+              <div className="gap-2 lg:w-[20rem] flex flex-col self-start ">
                 <h1 className="font-[700]">Price Range</h1>
                 <div className="flex gap-2 items-center">
                   <input
@@ -61,7 +61,7 @@ const FilterSection = ({
               </div>
             </div>
 
-            <div className="gap-2 w-[20rem] flex flex-col self-end">
+            <div className="gap-2 w-full lg:w-[20rem] flex flex-col lg:self-end">
               <h1 className="font-[700]">Sort By</h1>
 
               <select
@@ -79,7 +79,7 @@ const FilterSection = ({
             </div>
           </div>
 
-          <div className="gap-2 w-[20rem] flex flex-col ">
+          <div className="gap-2 w-full lg:w-[20rem] flex flex-col ">
             <h1 className="font-[700]">Order</h1>
             <select
               className="p-2 rounded-lg"

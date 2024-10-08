@@ -1,17 +1,43 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { CartContext, CartProvider } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import useOnClickOutside from "../hooks/useOnClickOutside";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { getTotalItems, cart } = useContext(CartContext);
-  console.log({ getTotalItems, cart });
+  const { removeFromCart, addToCart, decreaseQuantity, getTotalPrice } =
+    useContext(CartContext);
+  const [showCart, setShowCart] = useState<boolean>(false);
+  const cartBarRef = useRef<HTMLDivElement | null>(null);
+
+  useOnClickOutside(cartBarRef, () => setShowCart(false));
+
+  const onRemoveFromCart = (productId: number) => {
+    try {
+      removeFromCart(productId);
+      toast.success("Removed item from cart");
+    } catch (error) {
+      toast.error(`An error occured, please try again`);
+    }
+  };
 
   return (
     <>
       <div className="w-full">
-        <div className="flex items-center w-full max-w-[85rem] mx-auto   py-4 w-full pl-20 gap-[70rem]">
-          <h1 className="text-2xl font-bold">Test App</h1>
+        <div className="flex items-center w-full lg:max-w-[85rem] mx-auto justify-between  py-4 w-full pl-6 pr-4 lg:pl-20 lg:gap-[70rem]">
+          <h1
+            className="text-2xl font-bold hover:underline cursor-pointer "
+            onClick={() => navigate("/")}
+          >
+            Test App
+          </h1>
 
-          <div className="flex gap-1">
+          <div
+            className="flex gap-1 cursor-pointer"
+            onClick={() => setShowCart(!showCart)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -33,7 +59,69 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="fixed h-screen w-[20rem] top-0 bg-white right-0 border-2 border-[red] px-6 flex flex-col"></div>
+        <div
+          className={`fixed h-screen w-full top-0 bg-transparent right-0  px-6 flex flex-col
+            ease-in-out duration-700 ${
+              showCart ? " translate-x-0" : " translate-x-[150%]"
+            }
+            `}
+        >
+          <div className="overlay"></div>
+          <div
+            className={`w-[30rem] h-screen top-0 right-0 fixed bg-white flex flex-col ease-in-out duration-700 `}
+            ref={cartBarRef}
+          >
+            <div
+              className="absolute right-10 top-6 cursor-pointer"
+              onClick={() => setShowCart(!showCart)}
+            >
+              X
+            </div>
+            <div className="flex flex-col gap-2 mt-12 px-10">
+              <h1 className="font-bold text-xl">Shopping Cart</h1>
+              <p>You have {getTotalItems()} items in your cart</p>
+
+              {cart?.map((c, index) => (
+                <div className="w-full    flex items-center gap-4" key={index}>
+                  <div className="w-4/12  h-[7rem] bg-[#e6e6e6]"></div>
+                  <div className="flex flex-col">
+                    <h1 className="font-bold text-lg max-w-[8rem]">{c.name}</h1>
+                    <p>${c.price} each</p>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <div
+                      className="py-2 px-4 w-max border-2 h-max w-max rounded-md cursor-pointer"
+                      onClick={() => decreaseQuantity(c.id)}
+                    >
+                      -
+                    </div>
+                    {c?.quantity}
+                    <div
+                      onClick={() => addToCart(c)}
+                      className="py-2 px-4 w-max border-2 h-max w-max rounded-md"
+                    >
+                      +
+                    </div>
+                  </div>
+
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => onRemoveFromCart(c.id)}
+                  >
+                    x
+                  </div>
+                </div>
+              ))}
+              <div className="w-full justify-between flex font-bold text-lg">
+                <h1>Total:</h1>
+                {cart.length > 0 && <p>{getTotalPrice()}</p>}
+              </div>
+              <button className="py-2 w-full bg-[#0f1428] text-white text-sm rounded-md">
+                Proceed to checkout
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

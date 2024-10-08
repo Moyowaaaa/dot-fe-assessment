@@ -8,14 +8,37 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Details from "./pages/details";
 import AddProduct from "./pages/addProduct";
 import { CartProvider } from "./context/CartContext";
+import { Toaster, resolveValue } from "react-hot-toast";
 
 function App() {
-  const [count, setCount] = useState(0);
   const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
+        <Toaster
+          position="bottom-center"
+          toastOptions={{
+            success: {
+              className: "toast-success",
+              duration: 3000,
+              style: {
+                backgroundColor: "#344054",
+                color: "white",
+                minWidth: "max-content",
+              },
+            },
+            error: {
+              className: "toast-error",
+              duration: 3000,
+              style: {
+                backgroundColor: "red",
+                color: "white",
+                minWidth: "max-content",
+              },
+            },
+          }}
+        />
         <div className="App">
           <Router>
             <Routes>

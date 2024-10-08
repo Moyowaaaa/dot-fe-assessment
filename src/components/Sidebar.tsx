@@ -11,7 +11,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="min-h-screen  w-2/12  py-6 h-full bg-[white] h-[110vh]">
+      <div className="min-h-screen  w-2/12  py-6 h-full bg-[white] h-[110vh] hidden lg:flex flex-col">
         <h1 className="px-4 font-bold text-lg">All</h1>
 
         {!categories ? (

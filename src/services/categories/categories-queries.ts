@@ -3,15 +3,17 @@ import { handleApiError } from "../../utils/api-service";
 
 const API_URL = "http://localhost:3000/api";
 
-// Products
 export const useGetCategories = () => {
   return useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/categories?`);
-      if (!response.ok) throw new Error("Network response was not ok");
-      return response.json();
+      try {
+        const response = await fetch(`${API_URL}/categories?`);
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      } catch (error) {
+        handleApiError(error);
+      }
     },
-    onError: handleApiError, // Optional error handling
   });
 };

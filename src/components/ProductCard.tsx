@@ -2,20 +2,23 @@ import React, { useContext } from "react";
 import { Product } from "../services/products/product-model";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import toast from "react-hot-toast";
 
 const ProductCard = ({ product }: { product: Product }) => {
   const navigate = useNavigate();
   const { addToCart } = useContext(CartContext);
 
   const onAddToCart = () => {
-    addToCart(product);
-    // Optionally, you can add a notification or feedback here
-    console.log(`Added ${product.name} to cart`);
+    try {
+      addToCart(product);
+    } catch (error) {
+      toast.error(`An error occured, please try again`);
+    }
   };
 
   return (
     <>
-      <div className="w-[22vw] bg-white  min-h-[30rem] max-h-[30rem] rounded-[1rem] flex flex-col border-2 cursor-pointer">
+      <div className="w-11/12 lg:w-[22vw] bg-white min-h-[35rem]   lg:max-h-[30rem] rounded-[1rem] flex flex-col border-2 cursor-pointer">
         <div
           className="h-3/6 max-h-3/6 w-full bg-[#e6e6e6] flex items-center justify-center rounded-t-[1rem]"
           onClick={() => navigate(`/product/${product?.id}`)}
