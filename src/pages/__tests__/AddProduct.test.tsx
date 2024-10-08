@@ -10,6 +10,4 @@ test("submits the form with valid data", async () => {
 
   //Test to simulate form submission
   userEvent.click(screen.getByText(/Create Product/i));
-
-  // Assert expected outcome
 });

@@ -22,6 +22,31 @@ The technologies I used on this project:
 - Tanstack query
 - React hot toast
 
+## Assumptions I made
+
+- I assumed that both routes; products and categories are meant to return the same data and with that I rendered the categories of each product as well as their sub categories in the left sidebar.
+
+- Parameters for the sort by field for the filters were not specified, so I specified mine;(category, price)
+
+## Any additional features I implemented
+
+- Slide animation in for sidebar that holds the cart
+
+- Custom click outside hook for if a user clicks outside the cart, the cart closes
+
+## Areas I would improve on if given more time
+
+- I decided to use tailwind css for css styling so as to be fast, next time I'd use SCSS instead of tailwind so as to make sure the code is less verbose
+  <br/>
+- Properly setup tests in this project, currently I can't seem to get all the tests I set up to work; there an issue with the testing library and vite configuration, so if I had more time, I would focus on rectifying the issue  
+  <br/>
+  <br/>
+
+1. Disable the built-in TypeScript Extension
+   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
+   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
+2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+
 This project was bootstrapped with [Vite react-app]( [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## project Setup
@@ -43,30 +68,6 @@ npm run dev
 ```sh
 npm run build
 ```
-
-## Assumptions I made
-
-- I assumed that both routes; products and categories are meant to return the same data and with that I rendered the categories of each product as well as their sub categories in the left sidebar.
-
-- Parameters for the sort by field for the filters were not specified, so I specified mine;(category, price)
-
-## Any additional features I implemented
-
-- Slide animation in for sidebar that holds the cart
-
-- Custom click outside hook for if a user clicks outside the cart, the cart closes
-
-## Areas I would improve on if given more time
-
-- I decided to use tailwind css for css styling so as to be fast, next time I'd use SCSS instead of tailwind so as to make sure the code is less verbose
-  <br/>
-  <br/>
-  <br/>
-
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
 ## Customize configuration
 
