@@ -3,7 +3,6 @@ import { handleApiError } from "../../utils/api-service";
 
 const API_URL = "http://localhost:3000/api";
 
-// Products
 export const useGetProducts = (params: any) => {
   return useQuery({
     queryKey: ["products", params],

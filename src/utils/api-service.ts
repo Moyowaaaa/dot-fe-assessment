@@ -6,7 +6,6 @@ export const api = axios.create({
   baseURL: API_URL,
 });
 
-// Helper function to handle API errors
 export const handleApiError = (error: unknown) => {
   if (error instanceof Error) {
     throw new Error(`API Error: ${error.message}`);
