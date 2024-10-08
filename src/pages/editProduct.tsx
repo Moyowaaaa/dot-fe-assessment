@@ -5,20 +5,14 @@ import { useGetProduct } from "../services/products/product-queries";
 import toast from "react-hot-toast";
 import { Product } from "../services/products/product-model";
 import { useUpdateProduct } from "../services/products/product-mutations";
+import { specificationFields } from "./addProduct";
 
-interface SpecificationField {
-  specification: { key: string; value: string };
-  onKeyChange: (value: string) => void;
-  onValueChange: (value: string) => void;
-  onRemove: () => void;
-}
-
-const SpecificationField: React.FC<SpecificationField> = ({
+const SpecificationField = ({
   specification,
   onKeyChange,
   onValueChange,
   onRemove,
-}) => (
+}: specificationFields) => (
   <div className="flex items-center gap-2">
     <input
       type="text"
@@ -44,7 +38,7 @@ const SpecificationField: React.FC<SpecificationField> = ({
   </div>
 );
 
-const EditProduct: React.FC = () => {
+const EditProduct = () => {
   const { id } = useParams();
   if (!id) return null;
 

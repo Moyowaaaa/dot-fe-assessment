@@ -6,7 +6,7 @@ import { useAddProduct } from "../services/products/product-mutations";
 import { Product } from "../services/products/product-model";
 import Loader from "../components/Loader";
 
-interface specificationFields {
+export interface specificationFields {
   specification: { key: string; value: string };
   onKeyChange: (value: string) => void;
   onValueChange: (value: string) => void;
