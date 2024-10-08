@@ -1,6 +1,5 @@
 # Dot Frontend Assessment Solution | Moyowa Etchie
 
-[View Live Site](https://cowrywise-assessment-moyowa.netlify.app/)
 
 This is the solution to the frontend assessment task from Dot the task was to build out a mini e-commerce product catalog
 
