@@ -1,6 +1,5 @@
 # Dot Frontend Assessment Solution | Moyowa Etchie
 
-
 This is the solution to the frontend assessment task from Dot the task was to build out a mini e-commerce product catalog
 
 ## Features
@@ -53,13 +52,16 @@ npm run build
 
 ## Any additional features I implemented
 
-- Sidebar that holds the cart slide animation in
+- Slide animation in for sidebar that holds the cart
 
 - Custom click outside hook for if a user clicks outside the cart, the cart closes
 
 ## Areas I would improve on if given more time
 
-- Use SCSS instead of tailwind so as to make sure the code is less verbose
+- I decided to use tailwind css for css styling so as to be fast, next time I'd use SCSS instead of tailwind so as to make sure the code is less verbose
+  <br/>
+  <br/>
+  <br/>
 
 1. Disable the built-in TypeScript Extension
    1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette

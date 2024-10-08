@@ -296,7 +296,7 @@ const EditProduct = () => {
                 <button
                   type="button"
                   onClick={() => navigate("/")}
-                  className="py-3 min-w-[8rem] bg-[white] font-bold text-black text-sm rounded-md"
+                  className="py-3 min-w-[8rem] bg-[white] font-bold text-black text-sm rounded-md border-2"
                 >
                   Cancel
                 </button>
